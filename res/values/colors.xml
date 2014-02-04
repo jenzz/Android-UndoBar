@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="divider">#afafaf</color>
+    <color name="message_text">#ffffff</color>
+    <color name="button_text">#acacac</color>
+    <color name="button_background">#db555555</color>
+    <color name="button_background_pressed">#858585</color>
+
+</resources>

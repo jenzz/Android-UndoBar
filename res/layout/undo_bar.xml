@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jensdriller.libs.undobar.UndoBarView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/undoBar"
+    style="@style/Root" >
+
+    <TextView
+        android:id="@+id/message"
+        style="@style/Message" />
+
+    <LinearLayout
+        android:id="@+id/button"
+        style="@style/ButtonWrapper" >
+
+        <View style="@style/Divider" />
+
+        <TextView style="@style/Button" />
+    </LinearLayout>
+
+</com.jensdriller.libs.undobar.UndoBarView>
