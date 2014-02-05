@@ -1,6 +1,5 @@
 Android - UndoBar
 ==============
-
 As seen in Google's [Gmail](https://play.google.com/store/apps/details?id=com.google.android.gm) app.
 
 * Simple Builder pattern
@@ -10,7 +9,6 @@ As seen in Google's [Gmail](https://play.google.com/store/apps/details?id=com.go
 
 Screenshots
 -----------
-
 * pre KitKat
 
 ![alt text](https://raw.github.com/jenzz/Android-UndoBar/master/assets/Screenshot1.png "Undo Bar")
@@ -31,3 +29,7 @@ new UndoBar.Builder(this)//
   .setListener(this)//
   .show();
 ```
+
+License
+-------
+This project is licensed under the [MIT License](https://github.com/jenzz/Android-UndoBar/blob/master/LICENSE).
