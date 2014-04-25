@@ -1,0 +1,55 @@
+apply plugin: 'android-library'
+
+buildscript {
+  repositories {
+    mavenCentral()
+    mavenLocal()
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:0.8+'
+  }
+}
+
+
+dependencies {
+  compile 'com.android.support:support-v4:19.0+'
+  compile 'com.nineoldandroids:library:2.4.0'
+}
+
+group = "com.jensdriller.libs"
+artifactId = "undobar"
+version = "1.0"
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+android {
+  buildToolsVersion '19'
+    compileSdkVersion 19
+    defaultConfig {
+      versionCode 1
+      versionName "1.0"
+      minSdkVersion 8
+      targetSdkVersion 15
+    }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_6
+      targetCompatibility JavaVersion.VERSION_1_6
+  }
+  sourceSets {
+    main {
+      manifest.srcFile 'AndroidManifest.xml'
+        java.srcDirs = ['src']
+        res.srcDirs = ['res']
+    }
+  }
+}
+
+task wrapper(type: Wrapper) {
+  description "Generates the gradle wrapper"
+    gradleVersion = "1.10"
+}
