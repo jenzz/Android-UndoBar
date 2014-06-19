@@ -1,7 +1,9 @@
 package com.jensdriller.libs.undobar;
 
-import static com.nineoldandroids.view.ViewHelper.setAlpha;
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
+import com.nineoldandroids.view.ViewPropertyAnimator;
+
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -10,9 +12,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.view.ViewPropertyAnimator;
+import static com.nineoldandroids.view.ViewHelper.setAlpha;
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
 public final class UndoBar {
 
@@ -120,7 +121,7 @@ public final class UndoBar {
 
 	/**
 	 * Sets the duration of the animation for showing and hiding the undo bar.<br>
-	 * Default is {@link #DEFAULT_DURATION_ANIMATION}.
+	 * Default is {@link #DEFAULT_ANIMATION_DURATION}.
 	 * 
 	 * @param animationDuration
 	 *            in milliseconds
@@ -162,6 +163,10 @@ public final class UndoBar {
 	public void hide() {
 		hide(true);
 	}
+  
+  public boolean isVisible() {
+    return View.VISIBLE == mView.getVisibility(); 
+  }
 
 	/**
 	 * Hides the {@link UndoBar}.
@@ -309,7 +314,7 @@ public final class UndoBar {
 		/**
 		 * Sets the duration of the animation for showing and hiding the undo
 		 * bar.<br>
-		 * Default is {@link #DEFAULT_DURATION_ANIMATION}.
+		 * Default is {@link #DEFAULT_ANIMATION_DURATION}.
 		 * 
 		 * @param animationDuration
 		 *            in milliseconds
