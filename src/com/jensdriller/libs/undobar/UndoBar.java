@@ -209,6 +209,15 @@ public final class UndoBar {
 					}
 				});
 	}
+	
+	/**
+	 * Checks if the undo bar is currently visible.
+	 * 
+	 * @return {@code true} if visible, {@code false} otherwise
+	 */
+	public boolean isVisible() {
+		return mView.getVisibility() == View.VISIBLE;
+	}
 
 	/**
 	 * Notifies listener if available.
