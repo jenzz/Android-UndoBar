@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion Integer.parseInt(ANDROID_BUILD_COMPILE_SDK_VERSION)
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+    defaultPublishConfig "api15Release"
+    publishNonDefault true
+
+    defaultConfig {
+        applicationId "com.jensdriller.libs.undobar"
+        targetSdkVersion Integer.parseInt(ANDROID_BUILD_TARGET_SDK_VERSION)
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
+    }
+
+    productFlavors {
+        api8 {
+            minSdkVersion 8
+        }
+        api15 {
+            minSdkVersion 15
+        }
+    }
+}
+
+dependencies {
+    api8Compile files("libs/nineoldandroids-2.4.0.jar")
+}
+
+apply from: 'https://raw.githubusercontent.com/jenzz/gradle-mvn-push/master_jenzz/gradle-mvn-push.gradle'

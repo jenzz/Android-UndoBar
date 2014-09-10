@@ -5,7 +5,7 @@ As seen in Google's [Gmail](https://play.google.com/store/apps/details?id=com.go
 * Simple Builder pattern
 * Includes pre & post **KitKat** design
 * Supports **API Level >= 8**
-(using [nineoldandroids](http://nineoldandroids.com/) and the latest [android-support-v4.jar](http://developer.android.com/tools/support-library/index.html))
+(using [nineoldandroids](http://nineoldandroids.com/))
 
 Screenshots
 -----------
@@ -30,6 +30,25 @@ new UndoBar.Builder(this)//
   .show();
 ```
 
+Download
+--------
+
+Grab it via Gradle:
+
+For **API Level >= 15**:
+
+```groovy
+compile 'com.github.jenzz.undobar:library:1.1:api15Release@aar'
+```
+
+For **API Level < 15** (includes [nineoldandroids](http://nineoldandroids.com/)):
+
+```groovy
+compile 'com.github.jenzz.undobar:library:1.1:api8Release@aar'
+```
+
+Still using Eclipse? Check out the [master_eclipse](https://github.com/jenzz/Android-UndoBar/tree/master_eclipse) branch and import it as a library project.
+
 License
 -------
-This project is licensed under the [MIT License](https://github.com/jenzz/Android-UndoBar/blob/master/LICENSE).
+This project is licensed under the [MIT License](https://raw.githubusercontent.com/jenzz/Android-UndoBar/master/LICENSE).
