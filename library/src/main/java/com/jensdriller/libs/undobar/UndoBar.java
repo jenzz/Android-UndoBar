@@ -160,6 +160,7 @@ public final class UndoBar {
      * @param shouldAnimate whether the {@link UndoBar} should animate out
      */
     public void hide(boolean shouldAnimate) {
+        safelyNotifyOnHide();
         mHandler.removeCallbacks(mHideRunnable);
 
         if (shouldAnimate) {
