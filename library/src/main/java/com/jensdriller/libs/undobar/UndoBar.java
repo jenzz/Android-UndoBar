@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-public final class UndoBar {
+public class UndoBar {
 
     /**
      * Listener for actions of the undo bar.
@@ -34,10 +34,10 @@ public final class UndoBar {
      */
     public static final int DEFAULT_ANIMATION_DURATION = 300;
 
-    private final Activity mActivity;
-    private final UndoBarView mView;
-    private final ViewCompat mViewCompat;
-    private final Handler mHandler = new Handler();
+    protected final Activity mActivity;
+    protected final UndoBarView mView;
+    protected final ViewCompat mViewCompat;
+    protected final Handler mHandler = new Handler();
 
     private final Runnable mHideRunnable = new Runnable() {
 
@@ -57,11 +57,11 @@ public final class UndoBar {
         }
     };
 
-    private Listener mUndoListener;
-    private Parcelable mUndoToken;
-    private CharSequence mUndoMessage;
-    private int mDuration = DEFAULT_DURATION;
-    private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+    protected Listener mUndoListener;
+    protected Parcelable mUndoToken;
+    protected CharSequence mUndoMessage;
+    protected int mDuration = DEFAULT_DURATION;
+    protected int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
 
     public UndoBar(Activity activity) {
         mActivity = activity;
