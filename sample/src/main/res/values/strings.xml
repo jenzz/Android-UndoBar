@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Android-UndoBar Sample</string>
+    <string name="show_in_activity">Show in Activity</string>
+    <string name="undo_log">Undo Log:</string>
+
+</resources>

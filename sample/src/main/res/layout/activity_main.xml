@@ -1,0 +1,36 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/spacing">
+
+        <Button
+            android:id="@+id/btn_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/spacing"
+            android:text="@string/show_in_activity" />
+
+        <TextView
+            android:id="@+id/txt_log_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btn_activity"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/undo_log" />
+
+        <TextView
+            android:id="@+id/txt_log"
+            android:layout_below="@id/txt_log_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </RelativeLayout>
+</ScrollView>
