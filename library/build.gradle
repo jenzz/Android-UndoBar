@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    api8Compile files("libs/nineoldandroids-2.4.0.jar")
+    api8Compile 'com.nineoldandroids:library:2.4.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/jenzz/gradle-mvn-push/master_jenzz/gradle-mvn-push.gradle'
