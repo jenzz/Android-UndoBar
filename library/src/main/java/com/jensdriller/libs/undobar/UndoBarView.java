@@ -82,8 +82,7 @@ public class UndoBarView extends MaxWidthLinearLayout {
 			message = in.readString();
 		}
 
-		@SuppressWarnings("unused")
-		private static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+		public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
 
 			@Override
 			public SavedState createFromParcel(Parcel in) {
