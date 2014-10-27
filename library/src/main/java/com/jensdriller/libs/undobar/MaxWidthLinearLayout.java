@@ -7,7 +7,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-public class MaxWidthLinearLayout extends LinearLayout {
+class MaxWidthLinearLayout extends LinearLayout {
 
 	public MaxWidthLinearLayout(Context context) {
 		super(context);
@@ -25,7 +25,7 @@ public class MaxWidthLinearLayout extends LinearLayout {
 		init(attrs);
 	}
 
-	protected int mMaxWidth;
+	private int mMaxWidth;
 
 	private void init(AttributeSet attrs) {
 		if (attrs != null) {

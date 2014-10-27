@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-public class UndoBarView extends MaxWidthLinearLayout {
+class UndoBarView extends MaxWidthLinearLayout {
 
 	public UndoBarView(Context context) {
 		super(context);
@@ -65,7 +65,7 @@ public class UndoBarView extends MaxWidthLinearLayout {
 
 	private static class SavedState extends BaseSavedState {
 
-		private String message;
+		String message;
 
 		SavedState(Parcelable superState) {
 			super(superState);
