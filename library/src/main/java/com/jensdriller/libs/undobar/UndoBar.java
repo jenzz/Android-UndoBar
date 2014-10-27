@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 @SuppressWarnings({"UnusedDeclaration", "WeakerAccess"})
-public final class UndoBar {
+public class UndoBar {
 
     /**
      * Listener for actions of the undo bar.
@@ -35,17 +35,16 @@ public final class UndoBar {
      */
     public static final int DEFAULT_ANIMATION_DURATION = 300;
 
-    private final Activity mActivity;
-    private final UndoBarView mView;
-    private final ViewCompat mViewCompat;
-    private final Handler mHandler = new Handler();
+    protected final Activity mActivity;
+    protected final UndoBarView mView;
+    protected final ViewCompat mViewCompat;
+    protected final Handler mHandler = new Handler();
 
     private final Runnable mHideRunnable = new Runnable() {
 
         @Override
         public void run() {
-            hide(true);
-            safelyNotifyOnHide();
+            onHide();
         }
     };
 
@@ -54,16 +53,15 @@ public final class UndoBar {
 
         @Override
         public void onClick(View v) {
-            hide(true);
-            safelyNotifyOnUndo();
+            onUndo();
         }
     };
 
-    private Listener mUndoListener;
-    private Parcelable mUndoToken;
-    private CharSequence mUndoMessage;
-    private int mDuration = DEFAULT_DURATION;
-    private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+    protected Listener mUndoListener;
+    protected Parcelable mUndoToken;
+    protected CharSequence mUndoMessage;
+    protected int mDuration = DEFAULT_DURATION;
+    protected int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
 
     public UndoBar(Activity activity) {
         mActivity = activity;
@@ -175,16 +173,25 @@ public final class UndoBar {
     }
 
     /**
+     * Checks if the undo bar is currently visible.
+     *
+     * @return {@code true} if visible, {@code false} otherwise
+     */
+    public boolean isVisible() {
+        return mView.getVisibility() == View.VISIBLE;
+    }
+
+    /**
      * Performs the actual show animation.
      */
-    private void animateIn() {
+    protected void animateIn() {
         mViewCompat.animateIn(mAnimationDuration);
     }
 
     /**
      * Performs the actual hide animation.
      */
-    private void animateOut() {
+    protected void animateOut() {
         mViewCompat.animateOut(mAnimationDuration, new ViewCompat.AnimatorListener() {
             @Override
             public void onAnimationEnd() {
@@ -196,18 +203,27 @@ public final class UndoBar {
     }
 
     /**
-     * Checks if the undo bar is currently visible.
-     *
-     * @return {@code true} if visible, {@code false} otherwise
+     * Called when the undo bar disappears without being actioned.<br>
+     * Hides the undo bar and notifies potential listener.
      */
-    public boolean isVisible() {
-        return mView.getVisibility() == View.VISIBLE;
+    protected void onHide() {
+        hide(true);
+        safelyNotifyOnHide();
+    }
+
+    /**
+     * Called when the undo button is pressed.<br>
+     * Hides the undo bar and notifies potential listener.
+     */
+    protected void onUndo() {
+        hide(true);
+        safelyNotifyOnUndo();
     }
 
     /**
      * Notifies listener if available.
      */
-    private void safelyNotifyOnHide() {
+    protected void safelyNotifyOnHide() {
         if (mUndoListener != null) {
             mUndoListener.onHide();
         }
@@ -216,7 +232,7 @@ public final class UndoBar {
     /**
      * Notifies listener if available.
      */
-    private void safelyNotifyOnUndo() {
+    protected void safelyNotifyOnUndo() {
         if (mUndoListener != null) {
             mUndoListener.onUndo(mUndoToken);
         }
@@ -228,7 +244,7 @@ public final class UndoBar {
      * If {@code true}, returns that instance.<br>
      * If {@code false}, inflates a new {@link UndoBarView} and returns it.
      */
-    private UndoBarView getView(Activity activity) {
+    protected UndoBarView getView(Activity activity) {
         ViewGroup rootView = (ViewGroup) activity.findViewById(android.R.id.content);
         UndoBarView undoBarView = (UndoBarView) rootView.findViewById(R.id.undoBar);
         if (undoBarView == null) {
