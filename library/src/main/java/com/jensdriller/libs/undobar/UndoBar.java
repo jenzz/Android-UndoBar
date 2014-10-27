@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+@SuppressWarnings({"UnusedDeclaration", "WeakerAccess"})
 public final class UndoBar {
 
     /**
@@ -48,6 +49,7 @@ public final class UndoBar {
         }
     };
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final OnClickListener mOnUndoClickListener = new OnClickListener() {
 
         @Override
@@ -335,6 +337,7 @@ public final class UndoBar {
          *
          * @param shouldAnimate whether the {@link UndoBar} should animate in and out.
          */
+        @SuppressWarnings("SameParameterValue")
         public void show(boolean shouldAnimate) {
             create().show(shouldAnimate);
         }

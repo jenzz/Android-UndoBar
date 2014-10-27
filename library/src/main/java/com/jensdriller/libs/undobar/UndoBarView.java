@@ -63,7 +63,8 @@ class UndoBarView extends MaxWidthLinearLayout {
 		setMessage(ss.message);
 	}
 
-	private static class SavedState extends BaseSavedState {
+	@SuppressWarnings("NullableProblems")
+    private static class SavedState extends BaseSavedState {
 
 		String message;
 

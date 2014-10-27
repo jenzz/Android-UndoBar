@@ -2,9 +2,11 @@ package com.jensdriller.libs.undobar;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 
+@SuppressLint("NewApi")
 class ViewCompatImpl extends ViewCompat {
 
     private final ViewPropertyAnimator mViewPropertyAnimator;
