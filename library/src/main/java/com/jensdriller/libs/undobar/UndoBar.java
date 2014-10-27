@@ -1,12 +1,15 @@
 package com.jensdriller.libs.undobar;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 
 @SuppressWarnings({"UnusedDeclaration", "WeakerAccess"})
 public class UndoBar {
@@ -35,7 +38,7 @@ public class UndoBar {
      */
     public static final int DEFAULT_ANIMATION_DURATION = 300;
 
-    protected final Activity mActivity;
+    protected final Context mContext;
     protected final UndoBarView mView;
     protected final ViewCompat mViewCompat;
     protected final Handler mHandler = new Handler();
@@ -64,8 +67,16 @@ public class UndoBar {
     protected int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
 
     public UndoBar(Activity activity) {
-        mActivity = activity;
-        mView = getView(activity);
+        this(activity.getWindow());
+    }
+
+    public UndoBar(Dialog dialog) {
+        this(dialog.getWindow());
+    }
+
+    public UndoBar(Window window) {
+        mContext = window.getContext();
+        mView = getView(window);
         mView.setOnUndoClickListener(mOnUndoClickListener);
         mViewCompat = new ViewCompatImpl(mView);
 
@@ -83,7 +94,7 @@ public class UndoBar {
      * Sets the message to be displayed on the left of the undo bar.
      */
     public void setMessage(int messageResId) {
-        mUndoMessage = mActivity.getString(messageResId);
+        mUndoMessage = mContext.getString(messageResId);
     }
 
     /**
@@ -240,23 +251,32 @@ public class UndoBar {
 
     /**
      * Checks if there is already an {@link UndoBarView} instance added to the
-     * given {@link Activity}.<br>
+     * given {@link Window}.<br>
      * If {@code true}, returns that instance.<br>
      * If {@code false}, inflates a new {@link UndoBarView} and returns it.
      */
-    protected UndoBarView getView(Activity activity) {
-        ViewGroup rootView = (ViewGroup) activity.findViewById(android.R.id.content);
+    protected UndoBarView getView(Window window) {
+        ViewGroup decorView = (ViewGroup) window.getDecorView();
+
+        // If we're operating within an Activity, limit ourselves to the content view.
+        ViewGroup rootView = (ViewGroup) decorView.findViewById(android.R.id.content);
+        if (rootView == null) {
+            rootView = decorView;
+        }
+
         UndoBarView undoBarView = (UndoBarView) rootView.findViewById(R.id.undoBar);
         if (undoBarView == null) {
-            undoBarView = (UndoBarView) LayoutInflater.from(activity).inflate(R.layout.undo_bar, rootView, false);
+            undoBarView = (UndoBarView) LayoutInflater.from(rootView.getContext())
+                    .inflate(R.layout.undo_bar, rootView, false);
             rootView.addView(undoBarView);
         }
+
         return undoBarView;
     }
 
     public static class Builder {
 
-        private final Activity mActivity;
+        private final Window mWindow;
         private CharSequence mUndoMessage;
         private Listener mUndoListener;
         private Parcelable mUndoToken;
@@ -264,18 +284,34 @@ public class UndoBar {
         private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
 
         /**
-         * Constructor using the {@link Activity} in which the undo bar will be
+         * Constructor using the {@link android.app.Activity} in which the undo bar will be
          * displayed
          */
         public Builder(Activity activity) {
-            mActivity = activity;
+            mWindow = activity.getWindow();
+        }
+
+        /**
+         * Constructor using the {@link android.app.Dialog} in which the undo bar will be
+         * displayed
+         */
+        public Builder(Dialog dialog) {
+            mWindow = dialog.getWindow();
+        }
+
+        /**
+         * Constructor using the {@link Window} in which the undo bar will be
+         * displayed
+         */
+        public Builder(Window window) {
+            mWindow = window;
         }
 
         /**
          * Sets the message to be displayed on the left of the undo bar.
          */
         public Builder setMessage(int messageResId) {
-            mUndoMessage = mActivity.getString(messageResId);
+            mUndoMessage = mWindow.getContext().getString(messageResId);
             return this;
         }
 
@@ -332,7 +368,7 @@ public class UndoBar {
          * configuration.
          */
         public UndoBar create() {
-            UndoBar undoBarController = new UndoBar(mActivity);
+            UndoBar undoBarController = new UndoBar(mWindow);
             undoBarController.setListener(mUndoListener);
             undoBarController.setUndoToken(mUndoToken);
             undoBarController.setMessage(mUndoMessage);

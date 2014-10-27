@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,16 +7,14 @@
     android:padding="@dimen/spacing">
 
     <Button
-        android:id="@+id/btn_activity"
+        android:id="@+id/btn_show_undo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing"
-        android:text="@string/test_activity" />
+        android:text="@string/show_undo_bar" />
 
-    <Button
-        android:id="@+id/btn_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test_dialog" />
+    <com.jensdriller.libs.sample.LogView
+        android:id="@+id/log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

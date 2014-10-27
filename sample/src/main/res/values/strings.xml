@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Android-UndoBar Sample</string>
-    <string name="show_in_activity">Show in Activity</string>
+    <string name="test_activity">Test Activity</string>
+    <string name="test_dialog">Test Dialog</string>
+    <string name="show_undo_bar">Show UndoBar</string>
     <string name="undo_log">Undo Log:</string>
 
 </resources>
