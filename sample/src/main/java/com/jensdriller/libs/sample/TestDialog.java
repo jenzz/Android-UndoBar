@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.jensdriller.libs.undobar.UndoBar;
 
@@ -13,14 +12,6 @@ public class TestDialog extends Dialog {
 
     public TestDialog(Context context) {
         super(context);
-    }
-
-    public TestDialog(Context context, int theme) {
-        super(context, theme);
-    }
-
-    protected TestDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
     }
 
     @Override
@@ -49,6 +40,6 @@ public class TestDialog extends Dialog {
     private void setHeight(float height) {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, (int) (displaymetrics.heightPixels * height));
+        getWindow().setLayout(getWindow().getAttributes().width, (int) (displaymetrics.heightPixels * height));
     }
 }

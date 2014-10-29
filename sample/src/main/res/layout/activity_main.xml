@@ -16,6 +16,13 @@
         android:id="@+id/btn_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing"
         android:text="@string/test_dialog" />
+
+    <Button
+        android:id="@+id/btn_dialog_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_dialog_fragment" />
 
 </LinearLayout>

@@ -7,6 +7,8 @@ import android.view.View;
 
 public class MainActivity extends Activity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 new TestDialog(v.getContext()).show();
+            }
+        });
+
+        findViewById(R.id.btn_dialog_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TestDialogFragment().show(getFragmentManager(), TAG);
             }
         });
     }
