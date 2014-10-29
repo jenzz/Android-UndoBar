@@ -220,6 +220,7 @@ public class UndoBar {
     protected void onHide() {
         hide(true);
         safelyNotifyOnHide();
+        mUndoListener = null;
     }
 
     /**
