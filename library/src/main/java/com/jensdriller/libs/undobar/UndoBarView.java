@@ -1,15 +1,13 @@
 package com.jensdriller.libs.undobar;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-class UndoBarView extends MaxWidthLinearLayout {
+class UndoBarView extends MaxWidthRelativeLayout {
 
 	public UndoBarView(Context context) {
 		super(context);
@@ -19,7 +17,6 @@ class UndoBarView extends MaxWidthLinearLayout {
 		super(context, attrs);
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public UndoBarView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}

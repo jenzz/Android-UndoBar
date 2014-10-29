@@ -1,26 +1,23 @@
 package com.jensdriller.libs.undobar;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-class MaxWidthLinearLayout extends LinearLayout {
+class MaxWidthRelativeLayout extends RelativeLayout {
 
-	public MaxWidthLinearLayout(Context context) {
+	public MaxWidthRelativeLayout(Context context) {
 		super(context);
 		init(null);
 	}
 
-	public MaxWidthLinearLayout(Context context, AttributeSet attrs) {
+	public MaxWidthRelativeLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(attrs);
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public MaxWidthLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+	public MaxWidthRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(attrs);
 	}
