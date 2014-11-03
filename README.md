@@ -38,13 +38,13 @@ Grab it via Gradle:
 For **API Level >= 15**:
 
 ```groovy
-compile 'com.github.jenzz.undobar:library:1.1:api15Release@aar'
+compile 'com.github.jenzz.undobar:library:1.2:api15Release@aar'
 ```
 
 For **API Level < 15** (includes [nineoldandroids](http://nineoldandroids.com/)):
 
 ```groovy
-compile 'com.github.jenzz.undobar:library:1.1:api8Release@aar'
+compile 'com.github.jenzz.undobar:library:1.2:api8Release@aar'
 ```
 
 Still using Eclipse? Check out the [master_eclipse](https://github.com/jenzz/Android-UndoBar/tree/master_eclipse) branch and import it as a library project.<br />
