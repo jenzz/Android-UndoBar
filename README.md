@@ -47,7 +47,8 @@ For **API Level < 15** (includes [nineoldandroids](http://nineoldandroids.com/))
 compile 'com.github.jenzz.undobar:library:1.1:api8Release@aar'
 ```
 
-Still using Eclipse? Check out the [master_eclipse](https://github.com/jenzz/Android-UndoBar/tree/master_eclipse) branch and import it as a library project.
+Still using Eclipse? Check out the [master_eclipse](https://github.com/jenzz/Android-UndoBar/tree/master_eclipse) branch and import it as a library project.<br />
+Note that the Eclipse implementation is [v1.1](https://github.com/jenzz/Android-UndoBar/releases/tag/v1.1) only and won't receive any future updates.
 
 License
 -------
