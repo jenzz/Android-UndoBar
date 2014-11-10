@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <drawable name="root_background">@android:color/transparent</drawable>
-    <drawable name="message_background">@drawable/background_left</drawable>
-    <drawable name="button_wrapper_background">@drawable/background_right</drawable>
-    <drawable name="button_background">@android:color/transparent</drawable>
-
-</resources>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 class UndoBarView extends MaxWidthRelativeLayout {
@@ -22,16 +21,14 @@ class UndoBarView extends MaxWidthRelativeLayout {
 	}
 
 	private TextView mMessage;
-	private View mButton;
-    private TextView mButtonLabel;
+	private TextView mButton;
 
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
 		
 		mMessage = (TextView) findViewById(R.id.message);
-		mButton = findViewById(R.id.button);
-        mButtonLabel = (TextView) findViewById(R.id.button_label);
+		mButton = (TextView) findViewById(R.id.button);
 	}
 
 	void setMessage(CharSequence message) {
@@ -39,7 +36,7 @@ class UndoBarView extends MaxWidthRelativeLayout {
 	}
 
     void setButtonLabel(int buttonLabelResId) {
-        mButtonLabel.setText(buttonLabelResId);
+        mButton.setText(buttonLabelResId);
     }
 
 	void setOnUndoClickListener(OnClickListener onClickListener) {
