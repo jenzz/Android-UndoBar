@@ -65,6 +65,7 @@ public class UndoBar {
     protected CharSequence mUndoMessage;
     protected int mDuration = DEFAULT_DURATION;
     protected int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+    protected boolean mForceEnglishLocale;
 
     public UndoBar(Activity activity) {
         this(activity.getWindow());
@@ -133,6 +134,15 @@ public class UndoBar {
     }
 
     /**
+     * Forces the English {@link java.util.Locale Locale} to be used explicitly.<br>
+     * This means that the undo bar label will always show <b>UNDO</b>
+     * regardless of the device's current {@link java.util.Locale Locale}.
+     */
+    public void forceEnglishLocale(boolean forceEnglishLocale) {
+        mForceEnglishLocale = forceEnglishLocale;
+    }
+
+    /**
      * Calls {@link #show(boolean)} with {@code shouldAnimate = true}.
      */
     public void show() {
@@ -146,6 +156,7 @@ public class UndoBar {
      */
     public void show(boolean shouldAnimate) {
         mView.setMessage(mUndoMessage);
+        mView.setButtonLabel(mForceEnglishLocale ? R.string.undo_english : R.string.undo);
 
         mHandler.removeCallbacks(mHideRunnable);
         mHandler.postDelayed(mHideRunnable, mDuration);
@@ -278,11 +289,13 @@ public class UndoBar {
     public static class Builder {
 
         private final Window mWindow;
+
         private CharSequence mUndoMessage;
         private Listener mUndoListener;
         private Parcelable mUndoToken;
         private int mDuration = DEFAULT_DURATION;
         private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+        private boolean mForceEnglishLocale;
 
         /**
          * Constructor using the {@link android.app.Activity} in which the undo bar will be
@@ -365,6 +378,16 @@ public class UndoBar {
         }
 
         /**
+         * Forces the English {@link java.util.Locale Locale} to be used explicitly.<br>
+         * This means that the undo bar label will always show <b>UNDO</b>
+         * regardless of the device's current {@link java.util.Locale Locale}.
+         */
+        public Builder forceEnglishLocale(boolean forceEnglishLocale) {
+            mForceEnglishLocale = forceEnglishLocale;
+            return this;
+        }
+
+        /**
          * Creates an {@link UndoBar} instance with this Builder's
          * configuration.
          */
@@ -375,6 +398,7 @@ public class UndoBar {
             undoBarController.setMessage(mUndoMessage);
             undoBarController.setDuration(mDuration);
             undoBarController.setAnimationDuration(mAnimationDuration);
+            undoBarController.forceEnglishLocale(mForceEnglishLocale);
             return undoBarController;
         }
 

@@ -23,6 +23,7 @@ class UndoBarView extends MaxWidthRelativeLayout {
 
 	private TextView mMessage;
 	private View mButton;
+    private TextView mButtonLabel;
 
 	@Override
 	protected void onFinishInflate() {
@@ -30,11 +31,16 @@ class UndoBarView extends MaxWidthRelativeLayout {
 		
 		mMessage = (TextView) findViewById(R.id.message);
 		mButton = findViewById(R.id.button);
+        mButtonLabel = (TextView) findViewById(R.id.button_label);
 	}
 
 	void setMessage(CharSequence message) {
 		mMessage.setText(message);
 	}
+
+    void setButtonLabel(int buttonLabelResId) {
+        mButtonLabel.setText(buttonLabelResId);
+    }
 
 	void setOnUndoClickListener(OnClickListener onClickListener) {
 		mButton.setOnClickListener(onClickListener);

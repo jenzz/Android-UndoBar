@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="undo">UNDO</string>
+    <string name="undo">@string/undo_english</string>
+    <string name="undo_english">UNDO</string>
 
 </resources>

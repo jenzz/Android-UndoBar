@@ -15,7 +15,9 @@
 
         <View style="@style/Divider" />
 
-        <TextView style="@style/Button" />
+        <TextView
+            android:id="@+id/button_label"
+            style="@style/Button" />
     </LinearLayout>
 
 </com.jensdriller.libs.undobar.UndoBarView>

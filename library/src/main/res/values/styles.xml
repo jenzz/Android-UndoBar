@@ -54,7 +54,6 @@
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/button_text</item>
-        <item name="android:text">@string/undo</item>
         <item name="android:background">@drawable/button_background</item>
     </style>
 
