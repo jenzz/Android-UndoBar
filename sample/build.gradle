@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.jensdriller.libs.sample"
-        minSdkVersion 15
+        minSdkVersion 8
         targetSdkVersion Integer.parseInt(ANDROID_BUILD_TARGET_SDK_VERSION)
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
@@ -14,5 +14,5 @@ android {
 }
 
 dependencies {
-    compile project(":library")
+    compile project(path: ":library", configuration: "api8Release")
 }
