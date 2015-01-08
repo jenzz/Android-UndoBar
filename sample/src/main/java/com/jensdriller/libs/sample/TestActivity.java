@@ -1,12 +1,12 @@
 package com.jensdriller.libs.sample;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
 import com.jensdriller.libs.undobar.UndoBar;
 
-public class TestActivity extends Activity {
+public class TestActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

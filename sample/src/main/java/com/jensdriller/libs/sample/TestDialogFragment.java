@@ -1,8 +1,8 @@
 package com.jensdriller.libs.sample;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 
 /**
  * Created by jenzz on 29/10/14.

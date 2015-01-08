@@ -13,5 +13,6 @@ android {
 }
 
 dependencies {
+    compile "com.android.support:appcompat-v7:21.0.3"
     compile project(path: ":library", configuration: "api8Release")
 }
