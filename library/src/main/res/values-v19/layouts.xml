@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="undo_bar" type="layout">@layout/undo_bar_kitkat</item>
+
+</resources>

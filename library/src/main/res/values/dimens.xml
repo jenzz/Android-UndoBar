@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="undo_bar_height">64dp</dimen>
+    <dimen name="undo_bar_height_holo">64dp</dimen>
+    <dimen name="undo_bar_height_kitkat">48dp</dimen>
 
 </resources>
