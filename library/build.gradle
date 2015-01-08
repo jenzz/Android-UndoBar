@@ -7,7 +7,6 @@ android {
     publishNonDefault true
 
     defaultConfig {
-        applicationId "com.jensdriller.libs.undobar"
         targetSdkVersion Integer.parseInt(ANDROID_BUILD_TARGET_SDK_VERSION)
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
