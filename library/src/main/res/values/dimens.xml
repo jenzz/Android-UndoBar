@@ -4,5 +4,6 @@
     <dimen name="undo_bar_height_holo">64dp</dimen>
     <dimen name="undo_bar_height_kitkat">48dp</dimen>
     <dimen name="undo_bar_height_lollipop">48dp</dimen>
+    <dimen name="undo_bar_max_width_lollipop">@null</dimen> <!-- match_parent -->
 
 </resources>

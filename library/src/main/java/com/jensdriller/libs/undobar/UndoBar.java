@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -113,6 +114,7 @@ public class UndoBar {
     protected boolean mUseEnglishLocale;
     protected Style mStyle = Style.DEFAULT;
     protected int mUndoColor = Color.WHITE;
+    protected boolean mAlignParentBottom;
 
     /**
      * Creates a new undo bar instance to be displayed in the given {@link Activity}.
@@ -263,6 +265,16 @@ public class UndoBar {
     }
 
     /**
+     * If set to {@code true}, the undo bar will appear stuck at the bottom without any margins.<br>
+     * The default is {@code false}.<br>
+     * <b>Note:</b> This is only applied to the {@link UndoBar.Style#LOLLIPOP}
+     * style on devices with a smallest width of less than 600dp and ignored otherwise.
+     */
+    public void setAlignParentBottom(boolean alignParentBottom) {
+        mAlignParentBottom = alignParentBottom;
+    }
+
+    /**
      * Calls {@link #show(boolean)} with {@code shouldAnimate = true}.
      */
     public void show() {
@@ -277,8 +289,11 @@ public class UndoBar {
     public void show(boolean shouldAnimate) {
         mView.setMessage(mUndoMessage);
         mView.setButtonLabel(mUseEnglishLocale ? R.string.undo_english : R.string.undo);
-        if (mStyle == Style.LOLLIPOP) {
+        if (isLollipopStyle(mStyle)) {
             mView.setUndoColor(mUndoColor);
+            if (mAlignParentBottom && isAlignBottomPossible()) {
+                removeMargins(mView);
+            }
         }
 
         mHandler.removeCallbacks(mHideRunnable);
@@ -290,6 +305,31 @@ public class UndoBar {
         } else {
             mViewCompat.setAlpha(1);
         }
+    }
+
+    /**
+     * Checks whether the given style is {@link Style#LOLLIPOP}.
+     * Either explicitly set or the system default.
+     */
+    private boolean isLollipopStyle(Style style) {
+        return style == Style.LOLLIPOP || (style == Style.DEFAULT && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
+    }
+
+    /**
+     * Checks whether aligning the undo bar at the bottom is possible
+     * for the current device configuration.
+     */
+    private boolean isAlignBottomPossible() {
+        return mContext.getResources().getBoolean(R.bool.is_align_bottom_possible);
+    }
+
+    /**
+     * Removes any margins from the given view.
+     */
+    private static void removeMargins(View view) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        layoutParams.leftMargin = layoutParams.topMargin = layoutParams.rightMargin = layoutParams.bottomMargin = 0;
+        view.setLayoutParams(layoutParams);
     }
 
     /**
@@ -424,6 +464,7 @@ public class UndoBar {
         private boolean mUseEnglishLocale;
         private Style mStyle;
         private int mUndoColor = Color.WHITE;
+        private boolean mAlignParentBottom;
 
         /**
          * Constructor using the {@link android.app.Activity} in which the undo bar will be
@@ -550,6 +591,17 @@ public class UndoBar {
         }
 
         /**
+         * If set to {@code true}, the undo bar will appear stuck at the bottom without any margins.<br>
+         * The default is {@code false}.<br>
+         * <b>Note:</b> This is only applied to the {@link UndoBar.Style#LOLLIPOP}
+         * style on devices with a smallest width of less than 600dp and ignored otherwise.
+         */
+        public Builder setAlignParentBottom(boolean alignParentBottom) {
+            mAlignParentBottom = alignParentBottom;
+            return this;
+        }
+
+        /**
          * Creates an {@link UndoBar} instance with this Builder's
          * configuration.
          */
@@ -562,6 +614,7 @@ public class UndoBar {
             undoBarController.setAnimationDuration(mAnimationDuration);
             undoBarController.setUseEnglishLocale(mUseEnglishLocale);
             undoBarController.setUndoColor(mUndoColor);
+            undoBarController.setAlignParentBottom(mAlignParentBottom);
             return undoBarController;
         }
 

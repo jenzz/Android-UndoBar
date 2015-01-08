@@ -27,6 +27,7 @@ public class TestActivity extends ActionBarActivity {
                         .setMessage("Undo Me!")//
                         .setStyle((UndoBar.Style) spinner.getSelectedItem())//
                         .setUndoColor(getResources().getColor(R.color.primaryColor))
+                        .setAlignParentBottom(true)
                         .create();
                 logView.bind(undoBar);
                 logView.log("show()");

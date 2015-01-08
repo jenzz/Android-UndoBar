@@ -6,7 +6,7 @@
         <item name="android:layout_marginLeft">24dp</item>
         <item name="android:layout_marginRight">24dp</item>
         <item name="android:layout_marginBottom">24dp</item>
-        <item name="android:maxWidth">500dp</item>
+        <item name="android:maxWidth">@dimen/undo_bar_max_width_lollipop</item>
         <item name="android:background">@drawable/root_background_lollipop</item>
     </style>
 
