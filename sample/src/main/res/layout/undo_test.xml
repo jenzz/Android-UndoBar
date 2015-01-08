@@ -6,6 +6,11 @@
     android:gravity="center_horizontal"
     android:padding="@dimen/spacing">
 
+    <Spinner
+        android:id="@+id/spinner_styles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/btn_show_undo"
         android:layout_width="wrap_content"

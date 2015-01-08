@@ -3,6 +3,7 @@ package com.jensdriller.libs.undobar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -13,6 +14,50 @@ import android.view.Window;
 
 @SuppressWarnings({"UnusedDeclaration", "WeakerAccess"})
 public class UndoBar {
+
+    public enum Style {
+        /**
+         * The default style of the device's current API level.
+         */
+        DEFAULT(R.layout.undo_bar),
+        /**
+         * The default style for API Level <= 18.
+         * <p/>
+         * Example:<br>
+         * <img src="https://camo.githubusercontent.com/3559ea695528c547ecdb918004b0c1df7ac83999/68747470733a2f2f7261772e6769746875622e636f6d2f6a656e7a7a2f416e64726f69642d556e646f4261722f6d61737465722f6173736574732f53637265656e73686f74312e706e67" />
+         * <br>
+         * <img src="https://camo.githubusercontent.com/22ac172d0a9e1273b87d9164a99c6a0933996164/68747470733a2f2f7261772e6769746875622e636f6d2f6a656e7a7a2f416e64726f69642d556e646f4261722f6d61737465722f6173736574732f53637265656e73686f74322e706e67" />
+         */
+        HOLO(R.layout.undo_bar_holo),
+        /**
+         * The default style for API Level 19 + 20.
+         * <p/>
+         * Example:<br>
+         * <img src="https://camo.githubusercontent.com/bec5d8cf19564df3091cf5e2e77aff6760e88273/68747470733a2f2f7261772e6769746875622e636f6d2f6a656e7a7a2f416e64726f69642d556e646f4261722f6d61737465722f6173736574732f53637265656e73686f74332e706e67" />
+         * <br>
+         * <img src="https://camo.githubusercontent.com/107d8ed2fd880038b1d4a71dec9bbd1e02fd58e7/68747470733a2f2f7261772e6769746875622e636f6d2f6a656e7a7a2f416e64726f69642d556e646f4261722f6d61737465722f6173736574732f53637265656e73686f74342e706e67" />
+         */
+        KITKAT(R.layout.undo_bar_kitkat),
+        /**
+         * The default style for API Level >= 21.
+         * <p/>
+         * Example:<br>
+         * <img src="https://camo.githubusercontent.com/a32255c0a1f5abe56607d46bb9782b8f338fd9e3/68747470733a2f2f7261772e6769746875622e636f6d2f6a656e7a7a2f416e64726f69642d556e646f4261722f6d61737465722f6173736574732f53637265656e73686f74352e706e67" />
+         * <br>
+         * <img src="https://camo.githubusercontent.com/62d186f3ce9d55fa2b114b62887c714733155d5e/68747470733a2f2f7261772e6769746875622e636f6d2f6a656e7a7a2f416e64726f69642d556e646f4261722f6d61737465722f6173736574732f53637265656e73686f74362e706e67" />
+         */
+        LOLLIPOP(R.layout.undo_bar_lollipop);
+
+        private final int mLayoutResId;
+
+        private Style(int layoutResId) {
+            mLayoutResId = layoutResId;
+        }
+
+        int getLayoutResId() {
+            return mLayoutResId;
+        }
+    }
 
     /**
      * Listener for actions of the undo bar.
@@ -66,17 +111,72 @@ public class UndoBar {
     protected int mDuration = DEFAULT_DURATION;
     protected int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     protected boolean mUseEnglishLocale;
+    protected Style mStyle = Style.DEFAULT;
+    protected int mUndoColor = Color.WHITE;
 
+    /**
+     * Creates a new undo bar instance to be displayed in the given {@link Activity}.
+     */
     public UndoBar(Activity activity) {
         this(activity.getWindow());
     }
 
+    /**
+     * Creates a new undo bar instance to be displayed in the given {@link Activity}.
+     * <p/>
+     * The style forces the the undo bar to match the look and feel of a certain API level.<br>
+     * By default, it uses the style of the device's current API level.
+     * <p/>
+     * This is useful, for example, if you want to show a consistent
+     * Lollipop style across all API levels.
+     */
+    public UndoBar(Activity activity, Style style) {
+        this(activity.getWindow(), style);
+    }
+
+    /**
+     * Creates a new undo bar instance to be displayed in the given {@link Dialog}.
+     */
     public UndoBar(Dialog dialog) {
         this(dialog.getWindow());
     }
 
+    /**
+     * Creates a new undo bar instance to be displayed in the given {@link Dialog}.
+     * <p/>
+     * The style forces the the undo bar to match the look and feel of a certain API level.<br>
+     * By default, it uses the style of the device's current API level.
+     * <p/>
+     * This is useful, for example, if you want to show a consistent
+     * Lollipop style across all API levels.
+     */
+    public UndoBar(Dialog dialog, Style style) {
+        this(dialog.getWindow(), style);
+    }
+
+    /**
+     * Creates a new undo bar instance to be displayed in the given {@link Window}.
+     */
     public UndoBar(Window window) {
+        this(window, null);
+    }
+
+    /**
+     * Creates a new undo bar instance to be displayed in the given {@link Window}.
+     * <p/>
+     * The style forces the the undo bar to match the look and feel of a certain API level.<br>
+     * By default, it uses the style of the device's current API level.
+     * <p/>
+     * This is useful, for example, if you want to show a consistent
+     * Lollipop style across all API levels.
+     */
+    public UndoBar(Window window, Style style) {
+        if (style == null) {
+            style = Style.DEFAULT;
+        }
+
         mContext = window.getContext();
+        mStyle = style;
         mView = getView(window);
         mView.setOnUndoClickListener(mOnUndoClickListener);
         mViewCompat = new ViewCompatImpl(mView);
@@ -143,6 +243,26 @@ public class UndoBar {
     }
 
     /**
+     * Sets the text color of the undo button.<br>
+     * The default color is white.<br>
+     * <b>Note:</b> This is only applied to the {@link UndoBar.Style#LOLLIPOP}
+     * style and ignored otherwise.
+     */
+    public void setUndoColor(int color) {
+        mUndoColor = color;
+    }
+
+    /**
+     * Sets the text color resource id of the undo button.<br>
+     * The default color is white.<br>
+     * <b>Note:</b> This is only applied to the {@link UndoBar.Style#LOLLIPOP}
+     * style and ignored otherwise.
+     */
+    public void setUndoColorResId(int colorResId) {
+        mUndoColor = mContext.getResources().getColor(colorResId);
+    }
+
+    /**
      * Calls {@link #show(boolean)} with {@code shouldAnimate = true}.
      */
     public void show() {
@@ -157,6 +277,9 @@ public class UndoBar {
     public void show(boolean shouldAnimate) {
         mView.setMessage(mUndoMessage);
         mView.setButtonLabel(mUseEnglishLocale ? R.string.undo_english : R.string.undo);
+        if (mStyle == Style.LOLLIPOP) {
+            mView.setUndoColor(mUndoColor);
+        }
 
         mHandler.removeCallbacks(mHideRunnable);
         mHandler.postDelayed(mHideRunnable, mDuration);
@@ -270,16 +393,19 @@ public class UndoBar {
     protected UndoBarView getView(Window window) {
         ViewGroup decorView = (ViewGroup) window.getDecorView();
 
-        // If we're operating within an Activity, limit ourselves to the content view.
+        // if we're operating within an Activity, limit ourselves to the content view.
         ViewGroup rootView = (ViewGroup) decorView.findViewById(android.R.id.content);
         if (rootView == null) {
             rootView = decorView;
         }
 
+        // if it's the first undo bar in this window or a different style, inflate a new instance
         UndoBarView undoBarView = (UndoBarView) rootView.findViewById(R.id.undoBar);
-        if (undoBarView == null) {
+        if (undoBarView == null || undoBarView.getTag() != mStyle) {
+            rootView.removeView(undoBarView); // remove potential undo bar w/ different style
             undoBarView = (UndoBarView) LayoutInflater.from(rootView.getContext())
-                    .inflate(R.layout.undo_bar, rootView, false);
+                    .inflate(mStyle.getLayoutResId(), rootView, false);
+            undoBarView.setTag(mStyle);
             rootView.addView(undoBarView);
         }
 
@@ -296,6 +422,8 @@ public class UndoBar {
         private int mDuration = DEFAULT_DURATION;
         private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
         private boolean mUseEnglishLocale;
+        private Style mStyle;
+        private int mUndoColor = Color.WHITE;
 
         /**
          * Constructor using the {@link android.app.Activity} in which the undo bar will be
@@ -388,17 +516,52 @@ public class UndoBar {
         }
 
         /**
+         * Forces the style of the undo bar to match a certain API level.<br>
+         * By default, it uses the style of the device's current API level.
+         * <p/>
+         * This is useful, for example, if you want to show a consistent
+         * Lollipop style across all API levels.
+         */
+        public Builder setStyle(Style style) {
+            mStyle = style;
+            return this;
+        }
+
+        /**
+         * Sets the text color of the undo button.<br>
+         * The default color is white.<br>
+         * <b>Note:</b> This is only applied to the {@link UndoBar.Style#LOLLIPOP}
+         * style and ignored otherwise.
+         */
+        public Builder setUndoColor(int undoColor) {
+            mUndoColor = undoColor;
+            return this;
+        }
+
+        /**
+         * Sets the text color resource id of the undo button.<br>
+         * The default color is white.<br>
+         * <b>Note:</b> This is only applied to the {@link UndoBar.Style#LOLLIPOP}
+         * style and ignored otherwise.
+         */
+        public Builder setUndoColorResId(int undoColorResId) {
+            mUndoColor = mWindow.getContext().getResources().getColor(undoColorResId);
+            return this;
+        }
+
+        /**
          * Creates an {@link UndoBar} instance with this Builder's
          * configuration.
          */
         public UndoBar create() {
-            UndoBar undoBarController = new UndoBar(mWindow);
+            UndoBar undoBarController = new UndoBar(mWindow, mStyle);
             undoBarController.setListener(mUndoListener);
             undoBarController.setUndoToken(mUndoToken);
             undoBarController.setMessage(mUndoMessage);
             undoBarController.setDuration(mDuration);
             undoBarController.setAnimationDuration(mAnimationDuration);
             undoBarController.setUseEnglishLocale(mUseEnglishLocale);
+            undoBarController.setUndoColor(mUndoColor);
             return undoBarController;
         }
 

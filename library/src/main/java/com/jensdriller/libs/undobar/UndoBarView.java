@@ -1,6 +1,8 @@
 package com.jensdriller.libs.undobar;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -20,7 +22,12 @@ class UndoBarView extends MaxWidthRelativeLayout {
 		super(context, attrs, defStyle);
 	}
 
-	private TextView mMessage;
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public UndoBarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    private TextView mMessage;
 	private TextView mButton;
 
 	@Override
@@ -37,6 +44,10 @@ class UndoBarView extends MaxWidthRelativeLayout {
 
     void setButtonLabel(int buttonLabelResId) {
         mButton.setText(buttonLabelResId);
+    }
+
+    void setUndoColor(int color) {
+        mButton.setTextColor(color);
     }
 
 	void setOnUndoClickListener(OnClickListener onClickListener) {

@@ -27,7 +27,7 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">?android:attr/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/button_background_lollipop</item>
     </style>
 

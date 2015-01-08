@@ -1,7 +1,9 @@
 package com.jensdriller.libs.undobar;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
@@ -22,7 +24,13 @@ class MaxWidthRelativeLayout extends RelativeLayout {
 		init(attrs);
 	}
 
-	private int mMaxWidth;
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public MaxWidthRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(attrs);
+    }
+
+    private int mMaxWidth;
 
 	private void init(AttributeSet attrs) {
 		if (attrs != null) {
