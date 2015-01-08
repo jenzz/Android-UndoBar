@@ -65,7 +65,7 @@ public class UndoBar {
     protected CharSequence mUndoMessage;
     protected int mDuration = DEFAULT_DURATION;
     protected int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
-    protected boolean mForceEnglishLocale;
+    protected boolean mUseEnglishLocale;
 
     public UndoBar(Activity activity) {
         this(activity.getWindow());
@@ -138,8 +138,8 @@ public class UndoBar {
      * This means that the undo bar label will always show <b>UNDO</b>
      * regardless of the device's current {@link java.util.Locale Locale}.
      */
-    public void forceEnglishLocale(boolean forceEnglishLocale) {
-        mForceEnglishLocale = forceEnglishLocale;
+    public void setUseEnglishLocale(boolean useEnglishLocale) {
+        mUseEnglishLocale = useEnglishLocale;
     }
 
     /**
@@ -156,7 +156,7 @@ public class UndoBar {
      */
     public void show(boolean shouldAnimate) {
         mView.setMessage(mUndoMessage);
-        mView.setButtonLabel(mForceEnglishLocale ? R.string.undo_english : R.string.undo);
+        mView.setButtonLabel(mUseEnglishLocale ? R.string.undo_english : R.string.undo);
 
         mHandler.removeCallbacks(mHideRunnable);
         mHandler.postDelayed(mHideRunnable, mDuration);
@@ -295,7 +295,7 @@ public class UndoBar {
         private Parcelable mUndoToken;
         private int mDuration = DEFAULT_DURATION;
         private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
-        private boolean mForceEnglishLocale;
+        private boolean mUseEnglishLocale;
 
         /**
          * Constructor using the {@link android.app.Activity} in which the undo bar will be
@@ -382,8 +382,8 @@ public class UndoBar {
          * This means that the undo bar label will always show <b>UNDO</b>
          * regardless of the device's current {@link java.util.Locale Locale}.
          */
-        public Builder forceEnglishLocale(boolean forceEnglishLocale) {
-            mForceEnglishLocale = forceEnglishLocale;
+        public Builder setUseEnglishLocale(boolean useEnglishLocale) {
+            mUseEnglishLocale = useEnglishLocale;
             return this;
         }
 
@@ -398,7 +398,7 @@ public class UndoBar {
             undoBarController.setMessage(mUndoMessage);
             undoBarController.setDuration(mDuration);
             undoBarController.setAnimationDuration(mAnimationDuration);
-            undoBarController.forceEnglishLocale(mForceEnglishLocale);
+            undoBarController.setUseEnglishLocale(mUseEnglishLocale);
             return undoBarController;
         }
 
