@@ -46,6 +46,10 @@ new UndoBar.Builder(this)//
   .show();
 ```
 
+Example
+-------
+Check out the [sample project](https://github.com/jenzz/Android-UndoBar/tree/master/sample) for an example implementation.
+
 Download
 --------
 
