@@ -15,21 +15,18 @@
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="Button.Holo">
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
+    <style name="Button.Holo" parent="Message.Holo">
         <item name="android:drawableLeft">@drawable/ic_undo</item>
         <item name="android:drawablePadding">12dp</item>
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">#acacac</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/button_background_holo</item>
     </style>
 
