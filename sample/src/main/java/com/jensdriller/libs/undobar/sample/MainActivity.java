@@ -1,4 +1,4 @@
-package com.jensdriller.libs.sample;
+package com.jensdriller.libs.undobar.sample;
 
 import android.content.Intent;
 import android.os.Bundle;

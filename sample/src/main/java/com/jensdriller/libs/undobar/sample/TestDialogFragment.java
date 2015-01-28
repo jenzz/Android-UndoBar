@@ -1,4 +1,4 @@
-package com.jensdriller.libs.sample;
+package com.jensdriller.libs.undobar.sample;
 
 import android.app.Dialog;
 import android.os.Bundle;

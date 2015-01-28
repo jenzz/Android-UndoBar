@@ -1,4 +1,4 @@
-package com.jensdriller.libs.sample;
+package com.jensdriller.libs.undobar.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
