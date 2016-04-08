@@ -67,7 +67,7 @@ public class UndoBar {
         /**
          * Will be fired when the undo bar disappears without being actioned.
          */
-        void onHide();
+        void onHide(Parcelable token);
 
         /**
          * Will be fired when the undo button is pressed.
@@ -392,8 +392,10 @@ public class UndoBar {
      * Hides the undo bar and notifies potential listener.
      */
     protected void onHide() {
+        // hide(true) will set mUndoToken to null, so we grab a reference and pass it to safelyNotifyOnHide()
+        Parcelable token = mUndoToken;
         hide(true);
-        safelyNotifyOnHide();
+        safelyNotifyOnHide(token);
         mUndoListener = null;
     }
 
@@ -409,9 +411,9 @@ public class UndoBar {
     /**
      * Notifies listener if available.
      */
-    protected void safelyNotifyOnHide() {
+    protected void safelyNotifyOnHide(Parcelable token) {
         if (mUndoListener != null) {
-            mUndoListener.onHide();
+            mUndoListener.onHide(token);
         }
     }
 
