@@ -404,8 +404,10 @@ public class UndoBar {
      * Hides the undo bar and notifies potential listener.
      */
     protected void onUndo() {
+        // hide(true) will set mUndoToken to null, so we grab a reference and pass it to safelyNotifyOnHide()
+        Parcelable token = mUndoToken;
         hide(true);
-        safelyNotifyOnUndo();
+        safelyNotifyOnUndo(token);
     }
 
     /**
@@ -420,9 +422,9 @@ public class UndoBar {
     /**
      * Notifies listener if available.
      */
-    protected void safelyNotifyOnUndo() {
+    protected void safelyNotifyOnUndo(Parcelable token) {
         if (mUndoListener != null) {
-            mUndoListener.onUndo(mUndoToken);
+            mUndoListener.onUndo(token);
         }
     }
 
