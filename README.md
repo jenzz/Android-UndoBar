@@ -1,3 +1,9 @@
+DEPRECATED
+==========
+Android-UndoBar is deprecated. No more development will be taking place.
+
+Use Google's [Snackbar](https://www.google.com/design/spec/components/snackbars-toasts.html) instead.
+
 Android - UndoBar
 ==============
 As seen in Google's [Gmail](https://play.google.com/store/apps/details?id=com.google.android.gm) app.
